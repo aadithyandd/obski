@@ -84,7 +84,7 @@ async function searchWikipedia(query) {
     return null;
 }
 
-async function fallbackSuggestions(query) {
+async function fallbackSuggestions(query, articleFound = false) {
     const searchUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(query)}&limit=5&namespace=0&format=json&origin=*`;
     const response = await fetch(searchUrl);
     const data = await response.json();
@@ -93,11 +93,18 @@ async function fallbackSuggestions(query) {
     const descriptions = data[2];
     const links = data[3];
 
+    let message;
+    if (articleFound) {
+        message = `We found the article, but its citations did not meet the <span style="color:#EAB308; font-style:bold;">OBSKI rule</span> (e.g: too short, too modern, or missing academic identifiers). You've earned 1 Obscure Point!`;
+    } else {
+        message = `OBSKI couldn't find a direct article for <span style="color:#EAB308;">${query}</span>. Here are related Wikipedia articles. You've earned 1 Obscure Point!`;
+    }
+
     if (titles && titles.length > 0) {
         resultsContainer.innerHTML = `
             <div class="citation-card">
                 <h3>Try these similar topics!</h3>
-                <p>Obski couldn't find obscure citations for <span style="color:#EAB308;">${query}</span>, but here are related Wikipedia articles. You've earned 1 Obscure Point!</p>
+                <p>${message}</p>
                 <ul>
                     ${titles.map((title, index) => `
                         <li><a href="${links[index]}" target="_blank" style="color:#EAB308;">${title}</a>: ${descriptions[index]}</li>
@@ -122,16 +129,19 @@ async function fetchCitations() {
     loadingElement.classList.remove('hidden');
     let finalTopic = inputTopic;
     let success = false;
+    let articleFound = false;
 
     try {
         const suggestedTitle = await searchWikipedia(inputTopic);
 
         if (!suggestedTitle) {
-            if (!await fallbackSuggestions(inputTopic)) {
+            if (!await fallbackSuggestions(inputTopic, false)) {
                 resultsContainer.innerHTML = `<p class="error-message">❌ Error: Could not find any related Wikipedia articles for "${inputTopic}".</p>`;
             }
             return;
         }
+
+        articleFound = true;
 
         if (suggestedTitle !== inputTopic) {
             console.warn(`Original search topic updated from "${inputTopic}" to the official title: "${suggestedTitle}".`);
@@ -149,7 +159,7 @@ async function fetchCitations() {
         const data = await response.json();
 
         if (data.error || !data.parse) {
-            if (!await fallbackSuggestions(inputTopic)) {
+            if (!await fallbackSuggestions(inputTopic, true)) {
                 resultsContainer.innerHTML = `<p class="error-message">❌ Error: The article "${finalTopic}" could not be processed.</p>`;
             }
             return;
@@ -161,11 +171,15 @@ async function fetchCitations() {
         if (topCitations && topCitations.length > 0) {
             saveObscurityScore(topCitations, finalTopic);
             success = true;
-        } else if (!success) {
-            if (!await fallbackSuggestions(inputTopic)) {
+        } 
+        
+        // Final fallback if article was found (articleFound=true) but no citations met the score threshold (topCitations.length == 0)
+        if (!success && articleFound) {
+             if (!await fallbackSuggestions(inputTopic, true)) {
                  resultsContainer.innerHTML = `<p class="error-message">🧐 Article found but contained no scorable citations. No suggestions found either.</p>`;
-            }
+             }
         }
+
 
     } catch (error) {
         resultsContainer.innerHTML = `<p class="error-message">⚠️ An unexpected network error occurred: ${error.message}</p>`;
