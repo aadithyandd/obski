@@ -1,0 +1,172 @@
+body {
+    font-family: "Faculty Glyphic", sans-serif;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--white);
+    background-color: #171d2a;
+    background-image: url("https://www.transparenttextures.com/patterns/dark-circles.png");
+    color: white;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    position: static;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+#results-container {
+    display: grid;
+    gap: 20px;
+}
+
+.citation-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    width: 91%;
+}
+
+.citation-card h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.hidden {
+    display: none;
+}
+
+.obscure {
+    border-left: 5px solid darkred;
+    background-color: #dddddd00;
+}
+
+.title {
+    font-size: 70px;
+    font-weight: bolder;
+    margin-bottom: -25px !important;
+    transition: text-shadow 1s ease;
+    transition: color 1s ease;
+    width: 10%;
+}
+
+.title:hover {
+    color: #EAB308;
+    cursor: pointer;
+    transition: text-shadow 1s ease;
+    transition: color 9s ease;
+    text-shadow:
+        0 0 5px #EAB308,
+        0 0 3px #EAB308,
+        0 0 60px #EAB308;
+}
+
+.top-banner {
+    height: 140px;
+    background-image: url('../images/img1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f0f0f0;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.tag {
+    color: gray;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.inp {
+    flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1.3px solid #aeaeae;
+    margin-bottom: 0;
+    height: 38px;
+    font-family: "Libertinus Keyboard", system-ui;
+}
+
+.inp::placeholder {
+    font-family: monospace;
+    font-size: 10px;
+}
+
+.expl {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 100px;
+    position: static;
+    height: 38px;
+    margin-top: 0;
+    background-color: #EAB308;
+    border: none;
+    padding: 8px 16px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: font-size 0.3s ease;
+    font-family: monospace;
+}
+
+.expl:hover {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 100px;
+    position: static;
+    height: 38px;
+    margin-top: 0;
+    background-color: #EAB308;
+    border: none;
+    padding: 8px 16px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: font-size 0.3s ease;
+    font-family: monospace;
+}
+
+.game {
+    background-color: #2F3440;
+    backdrop-filter: blur(8px);
+    border: 0px solid rgba(255, 255, 255, 0.689);
+    height: 120px;
+    width: 90%;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 17px;
+    padding-top: 15px;
+    padding-bottom: 12px;
+    font-family: monospace;
+}
+
+.x {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    margin-left: 10px;
+    opacity: 44%;
+}
+
+.ftr {
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 10px;
+}
+
+.points-div {
+    width: 30%;
+    border-radius: 8px;
+    padding-left: 15px;
+    font-size: 15px;
+}
