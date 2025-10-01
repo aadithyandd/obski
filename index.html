@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libertinus+Keyboard&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obscure Wikipedia Citation Explorer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/logo1.png">
+</head>
+
+<body onload="loaded()"> 
+    <header>
+        <div class="top-banner"></div>
+        <h1 class="text-6xl font-extrabold mb-0 title">OBSKI</h1>
+        <h1>The Obscure Wikipedia Citation Explorer</h1>
+        <p class="tag">The Wikipedia rabbit hole, explored</p><br>
+        <div class="container-center">
+        </div>
+    </header>
+    <div class="game">
+        <p>Enter a topic and <label style="color:#EAB308; font-weight: bold;">discover</label> the rarest and most
+            specific
+            sources cited.</p>
+        <main>
+            <div class="input-area">
+                <input type="text" id="topic-input" placeholder="e.g: Medieval music" class="inp">
+                <button onclick="fetchCitations()" class="expl">Explore</button>
+            </div>
+    </div><br>
+
+    <div class="points-div">
+        <span>Your Obscure Points : </span>
+        <span class="points" id="points"></span>
+        <img src="images/x2.png" class="x" onclick="resetPoints()" title="Reset Points">
+    </div><br>
+
+    <div id="loading" class="hidden">Loading... This might take a moment.</div>
+
+    <section id="results-container">
+    </section>
+    </main>
+    <br><br><br><br><br> <br><br><br><br><br>
+    <footer class="ftr">
+        <p>Created by Aadithyan.D | <a style="color:#EAB308" href="https://www.instagram.com/aadithyandd/"
+                target="_blank">Instagram</a></p>
+        <p>Data sourced from Wikipedia's API</p>
+        <p style="color:grey">Gemini helped with api functions</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
