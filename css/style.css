@@ -28,7 +28,11 @@ body {
     padding: 15px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-    width: 91%;
+    width: auto; 
+    box-sizing: border-box; 
+    word-wrap: break-word; 
+    overflow-x: hidden;
+    width:96%;
 }
 
 .citation-card h3 {
@@ -87,12 +91,12 @@ body {
     width: 100%;
     box-sizing: border-box;
     padding: 8px;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 8px;
     border: 1.3px solid #aeaeae;
     margin-bottom: 0;
     height: 38px;
-    font-family: "Libertinus Keyboard", system-ui;
+    font-family: monospace;
 }
 
 .inp::placeholder {
